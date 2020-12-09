@@ -1,0 +1,19 @@
+
+.block {
+    color: green;
+    border: 1px black solid;
+    width: 4em;
+    height: 4em;
+  }
+  
+  .blockColorRed {
+    background: lightcoral;
+  }
+
+  .blockColorBlue {
+    background: lightblue;
+  }
+
+  .blockColorGreen {
+    background: lightgreen;
+  }

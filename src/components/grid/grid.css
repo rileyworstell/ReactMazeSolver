@@ -1,0 +1,6 @@
+.mainGrid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+    color: red;
+  }
