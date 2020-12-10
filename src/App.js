@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Grid} from './components/grid/grid.jsx'
 import {Button} from './components/button/button.jsx'
 import {Selected} from './components/selected/selected.jsx'
+import {Path} from './components/path/path.jsx'
 
 // Creates Array to be able to map over the blocks
 var arr = [];
@@ -33,16 +34,21 @@ class App extends Component {
     this.changeBlock = this.changeBlock.bind(this);
     this.recreateGrid = this.recreateGrid.bind(this);
     this.pointSelecter = this.pointSelecter.bind(this);
+    this.recreateGrid = this.recreateGrid.bind(this);
   }
 
 
-changeBlock(x) {
+changeBlock(x, path=null) {
+  if (path !== null) {
+    console.log(path);
+    this.setState({gridArr: x,  path: path});
+  }
   this.setState({gridArr: x});
 }
 
 updatePathMaze(x, path) {
-  console.log("updating Path Maze");
-  console.log(x);
+  console.log("path :)");
+  console.log(path);
   this.setState=({
     gridArr: x,
     path: path
@@ -70,21 +76,38 @@ recreateGrid() {
         arr[i][j] = "0";
     }
   }
-  this.setState({gridArr: arr}); 
+  arr[num-1][num-1] = "E";
+  this.setState({gridArr: arr,
+                startPointSelecter: 0 ,
+                s: null,
+                path: null,
+  }); 
 }
   render() {
   return (
     <div className="App">
-     <div>Hello Riley </div>
+     <div>This is a maze solver! <br/> Select Blocks to make them walls (red) and optionally select starting point and make a blue block. <br/>Then start the BFS. <br/> If you do not select a start point, one will be assigned for you. </div>
 
      <Selected startPointSelecter={this.state.startPointSelecter} 
           pointSelecter={this.pointSelecter}
           className={"selectedButton"}
           text={"Set Starting Point"}/>
 
-     <Button gridLength={this.state.gridLength} 
+
+    <Button gridLength={this.state.gridLength} 
+          clickDo={2}
+          recreateGrid={this.recreateGrid}
           path={this.state.path}
           changeBlock={this.changeBlock} 
+          gridArr={this.state.gridArr} 
+          className={"redButton"} 
+          text={"Restart Grid"}/>
+
+     <Button gridLength={this.state.gridLength} 
+          clickDo={1}
+          path={this.state.path}
+          changeBlock={this.changeBlock} 
+          recreateGrid={this.recreateGrid}
           gridArr={this.state.gridArr} 
           className={"button"} 
           s={this.state.s}
@@ -93,10 +116,14 @@ recreateGrid() {
      <Grid gridLength={this.state.gridLength} 
           changeBlock={this.changeBlock} 
           gridArr={this.state.gridArr} 
+          s={this.state.s}
           startPointSelecter={this.state.startPointSelecter}
           pointSelecter={this.pointSelecter}
           className="mainGrid"/> 
+          <Path path={this.state.path}/>
+          {/* <div id="path">Your Path: {() => {this.state.path.map((n) => n); }}</div> */}
     </div>
+    
   );
   }
 }

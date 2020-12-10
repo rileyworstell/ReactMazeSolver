@@ -12,6 +12,7 @@ let clickHandler = (props) => {
      var c = props.id % L;
 
     var x = props.gridArr;
+    if (x[r][c] !== "S") {
     if (props.startPointSelecter === 1) {
         x[r][c] = "S"
         props.changeBlock(x);
@@ -27,6 +28,7 @@ let clickHandler = (props) => {
             props.changeBlock(x);
         }
     }
+}
 
 };
 

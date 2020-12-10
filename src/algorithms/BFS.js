@@ -32,6 +32,9 @@ export const reconstructPath = (s, e, prev, arr, props) => {
     var b1;
     var b2;
     var path = [];
+    if (prev == undefined) {
+        return;
+    } else {
     path.push([prev[0][0]])
     for (var i = 0; i < prev.length; i++) {
         c1 = path[path.length-1][0][0]
@@ -52,20 +55,21 @@ export const reconstructPath = (s, e, prev, arr, props) => {
     path.reverse()
 
 
+    // return path
 
+    //
     var x = arr;
 
     // this is not working as expected because it is calling setState in a loop
     for (var z = 0; z < path.length - 1; z++) {
         x[path[z][0][0]][path[z][0][1]] = "Solved"
-        console.log("x");
-        console.log(x);
         props.changeBlock(x);
     }
         // starting point sometimes gets added to path
         x[s[0]][s[1]] = "S"
-        props.changeBlock(x);    
+        props.changeBlock(x, path);    
 
+    }
 }
 
 
