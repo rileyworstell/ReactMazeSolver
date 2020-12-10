@@ -50,27 +50,22 @@ export const reconstructPath = (s, e, prev, arr, props) => {
 
     }
     path.reverse()
-    console.log("path")
-    console.log(path);
-    // Reset start and End
-    arr[s[0]][s[1]] = "S"
-    arr[9][9] = "E"
-    e = [9, 9];
 
+
+
+    var x = arr;
+
+    // this is not working as expected because it is calling setState in a loop
     for (var z = 0; z < path.length - 1; z++) {
-        console.log(path[z][0]);
-        var x = props.gridArr;
         x[path[z][0][0]][path[z][0][1]] = "Solved"
+        console.log("x");
+        console.log(x);
         props.changeBlock(x);
-        
-        // if (z === path.length - 2) {
-        //     x[s[0]][s[1]] = "S"
-        //     props.changeBlock(x);
-        // }
     }
+        // starting point sometimes gets added to path
+        x[s[0]][s[1]] = "S"
+        props.changeBlock(x);    
 
-    console.log("arr");
-    console.log(arr);
 }
 
 

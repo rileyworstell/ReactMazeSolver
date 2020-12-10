@@ -15,6 +15,7 @@ for (i = 0; i < num; i++) {
       arr[i][j] = "0";
   }
 }
+arr[9][9] = "E";
 
 // End of creating array
 
@@ -26,15 +27,28 @@ class App extends Component {
       gridArr: arr,
       gridLength: num,
       startPointSelecter: 0 ,
-      s: null
+      s: null,
+      path: null,
     };
     this.changeBlock = this.changeBlock.bind(this);
     this.recreateGrid = this.recreateGrid.bind(this);
     this.pointSelecter = this.pointSelecter.bind(this);
   }
+
+
 changeBlock(x) {
   this.setState({gridArr: x});
 }
+
+updatePathMaze(x, path) {
+  console.log("updating Path Maze");
+  console.log(x);
+  this.setState=({
+    gridArr: x,
+    path: path
+});
+}
+// return the path to here and call a changeBlockSlowly(x, path) and do a this.setState({gridArr: x},() => {})  https://stackoverflow.com/questions/42018342/is-there-a-synchronous-alternative-of-setstate-in-reactjs
 
 pointSelecter(point) {
     if (point !== [-1, -1]) {
@@ -62,12 +76,14 @@ recreateGrid() {
   return (
     <div className="App">
      <div>Hello Riley </div>
+
      <Selected startPointSelecter={this.state.startPointSelecter} 
           pointSelecter={this.pointSelecter}
           className={"selectedButton"}
           text={"Set Starting Point"}/>
 
      <Button gridLength={this.state.gridLength} 
+          path={this.state.path}
           changeBlock={this.changeBlock} 
           gridArr={this.state.gridArr} 
           className={"button"} 
