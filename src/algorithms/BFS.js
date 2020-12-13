@@ -21,7 +21,7 @@ export const bfs = (props, arr, sP) => {
 
     props.changeBlock(arr);
 
-    prev = solve(s, prev, R, C, dr, dc, arr)
+    prev = solve(s, prev, R, C, dr, dc, arr, props)
 
     return reconstructPath(s, e, prev, arr, props)
 }
@@ -61,19 +61,21 @@ export const reconstructPath = (s, e, prev, arr, props) => {
     var x = arr;
 
     // this is not working as expected because it is calling setState in a loop
-    for (var z = 0; z < path.length - 1; z++) {
-        x[path[z][0][0]][path[z][0][1]] = "Solved"
-        props.changeBlock(x);
-    }
-        // starting point sometimes gets added to path
-        x[s[0]][s[1]] = "S"
-        props.changeBlock(x, path);    
+            // for (var z = 0; z < path.length - 1; z++) {
+            //     x[path[z][0][0]][path[z][0][1]] = "Solved"
+            //     props.changeBlock(x);
+            // }
+            //     // starting point sometimes gets added to path
+            //     x[s[0]][s[1]] = "S"
+            //     props.changeBlock(x, path);    
 
+        
+        props.awaitUpdatePath(x, path, s, e );
     }
 }
 
 
-export const solve = (s, prev, R, C, dr, dc, arr) => {
+export const solve = (s, prev, R, C, dr, dc, arr, props) => {
 	var rr = 0;
 	var cc = 0;
 	var parent;
@@ -92,6 +94,8 @@ export const solve = (s, prev, R, C, dr, dc, arr) => {
     }
   }
   visited[r][c] = 1;
+//   props.updateVisited(r, c);
+
   
   while (q.length !== 0) {
   	r = q[0][0];

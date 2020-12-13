@@ -52,6 +52,11 @@ export const Block = (props) => {
             <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorBlue`}></div>
         );
     }
+    else if(props.gridArr[r][c] === "V"){
+        return(
+            <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorYellow`}></div>
+        );
+    }
     else if(props.gridArr[r][c] === "Solved"){
         return(
             <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorGreen`}></div>
