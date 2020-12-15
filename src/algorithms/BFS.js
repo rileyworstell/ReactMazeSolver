@@ -10,6 +10,7 @@ export const bfs = (props, arr, sP) => {
         s = [0, 0];
     }
     var prev;
+    var visitedList = [];
     var R = 10;
     var C = 10;
     var dr = [-1, 1, 0, 0];
@@ -21,18 +22,18 @@ export const bfs = (props, arr, sP) => {
 
     props.changeBlock(arr);
 
-    prev = solve(s, prev, R, C, dr, dc, arr, props)
+    prev = solve(s, prev, R, C, dr, dc, arr, props, visitedList)
 
-    return reconstructPath(s, e, prev, arr, props)
+    return reconstructPath(s, e, prev, arr, props, visitedList)
 }
 
-export const reconstructPath = (s, e, prev, arr, props) => {
+export const reconstructPath = (s, e, prev, arr, props, visitedList) => {
     var c1;
     var c2;
     var b1;
     var b2;
     var path = [];
-    if (prev == undefined) {
+    if (prev === undefined) {
         return;
     } else {
     path.push([prev[0][0]])
@@ -54,28 +55,18 @@ export const reconstructPath = (s, e, prev, arr, props) => {
     }
     path.reverse()
 
-
-    // return path
-
-    //
     var x = arr;
-
-    // this is not working as expected because it is calling setState in a loop
-            // for (var z = 0; z < path.length - 1; z++) {
-            //     x[path[z][0][0]][path[z][0][1]] = "Solved"
-            //     props.changeBlock(x);
-            // }
-            //     // starting point sometimes gets added to path
-            //     x[s[0]][s[1]] = "S"
-            //     props.changeBlock(x, path);    
-
-        
-        props.awaitUpdatePath(x, path, s, e );
+    var leng = visitedList.length;
+    // push visited spots to beginning of path before calling awaitUpdatePath
+    for (var z = 0; z < visitedList.length; z++) {
+      path.unshift([visitedList[z]]);
+    }
+    props.awaitUpdatePath(x, path, s, e, leng );
     }
 }
 
 
-export const solve = (s, prev, R, C, dr, dc, arr, props) => {
+export const solve = (s, prev, R, C, dr, dc, arr, props, visitedList) => {
 	var rr = 0;
 	var cc = 0;
 	var parent;
@@ -94,6 +85,7 @@ export const solve = (s, prev, R, C, dr, dc, arr, props) => {
     }
   }
   visited[r][c] = 1;
+  visitedList.unshift([r, c]);
 //   props.updateVisited(r, c);
 
   
@@ -124,6 +116,7 @@ export const solve = (s, prev, R, C, dr, dc, arr, props) => {
          if (visited[rr][cc] !== 1) {
          	q.push([rr, cc]);
           visited[rr][cc] = 1;
+          visitedList.unshift([r, c]);
           prev.push([[rr, cc], [parent]]);
          }
   }
@@ -131,4 +124,3 @@ export const solve = (s, prev, R, C, dr, dc, arr, props) => {
 }
 }
 
-// bfs(s, e);

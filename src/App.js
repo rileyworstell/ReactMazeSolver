@@ -4,26 +4,17 @@ import {Grid} from './components/grid/grid.jsx'
 import {Button} from './components/button/button.jsx'
 import {Selected} from './components/selected/selected.jsx'
 import {Path} from './components/path/path.jsx'
+import {Arr} from './algorithms/initializeArr'
 
-// Creates Array to be able to map over the blocks
-var arr = [];
-var num = 10;
-for (var i = 0; i < num; i++) {
-  arr[i] = new Array(num);
-}
-for (i = 0; i < num; i++) {
-  for (var j = 0; j < num; j++) {
-      arr[i][j] = "0";
-  }
-}
-arr[9][9] = "E";
 
-// End of creating array
 
 class App extends Component {
 
   constructor(props) {
     super(props);
+    let initialValues = Arr();
+    var arr = initialValues[0];
+    var num = initialValues[1];
     this.state = {
       gridArr: arr,
       gridLength: num,
@@ -43,7 +34,6 @@ class App extends Component {
 
 changeBlock(x, path=null) {
   if (path !== null) {
-    console.log(path);
     this.setState({gridArr: x,  path: path});
   }
   this.setState({gridArr: x});
@@ -55,36 +45,35 @@ updatePathMaze = (x, i) => {
       setTimeout(() => { 
       i++;
       resolve(i);
-    }, 250);
-
+    }, 15);
     });
   });
-
-  
-  console.log('promise that returns the new integer');
     return promise;
 }
 
 
-async awaitUpdatePath(x, path, s, e, visited) {
-  debugger;
+async awaitUpdatePath(x, path, s, e, leng) {
+  // i is the promise and when the promise is returned it is incremented (this is for UI purposes)
   var i = 0;
   while ( i < path.length) {
-    x[path[i][0][0]][path[i][0][1]] = "Solved";
-    console.log(x);
+    // the first part of path is all of the visited up until the variable length and then that is the path to solve
+    if ( i <= leng) {
+      x[path[i][0][0]][path[i][0][1]] = "V";
+    } else {
+      x[path[i][0][0]][path[i][0][1]] = "Solved";
+    }
     const fetch = await this.updatePathMaze(x, i);
-    console.log(fetch);
     i = fetch;
   }
 
+  // resets starting and ending points
   x[s[0]][s[1]] = "S";
   x[e[0]][e[1]] = "E";
+  // this splits that path to solve from the whole path
+  path.splice(0, leng);
   this.setState({gridArr: x, path: path});
  
 }
-
-
-// return the path to here and call a changeBlockSlowly(x, path) and do a this.setState({gridArr: x},() => {})  https://stackoverflow.com/questions/42018342/is-there-a-synchronous-alternative-of-setstate-in-reactjs
 
 pointSelecter(point) {
     if (point !== [-1, -1]) {
@@ -116,7 +105,11 @@ recreateGrid() {
   render() {
   return (
     <div className="App">
-     <div>This is a maze solver! <br/> Select Blocks to make them walls (red) and optionally select starting point and make a blue block. <br/>Then start the BFS. <br/> If you do not select a start point, one will be assigned for you. </div>
+     <div>This is a maze solver!
+       <br/> Select Blocks to make them walls (red) and optionally select starting point and make a blue block. 
+       <br/> Yellow will show the algorithm working and Green is the path. 
+       <br/> Then start the BFS. 
+       <br/> If you do not select a start point, one will be assigned for you. </div>
 
      <Selected startPointSelecter={this.state.startPointSelecter} 
           pointSelecter={this.pointSelecter}
@@ -125,7 +118,7 @@ recreateGrid() {
 
 
     <Button gridLength={this.state.gridLength} 
-          clickDo={2}
+          clickDo={'recreateGrid'}
           recreateGrid={this.recreateGrid}
           path={this.state.path}
           changeBlock={this.changeBlock} 
@@ -134,7 +127,7 @@ recreateGrid() {
           text={"Restart Grid"}/>
 
      <Button gridLength={this.state.gridLength} 
-          clickDo={1}
+          clickDo={'bfs'}
           awaitUpdatePath={this.awaitUpdatePath}
           path={this.state.path}
           changeBlock={this.changeBlock} 
@@ -151,8 +144,9 @@ recreateGrid() {
           startPointSelecter={this.state.startPointSelecter}
           pointSelecter={this.pointSelecter}
           className="mainGrid"/> 
+          <br />
+          <br />
           <Path path={this.state.path}/>
-          {/* <div id="path">Your Path: {() => {this.state.path.map((n) => n); }}</div> */}
     </div>
     
   );

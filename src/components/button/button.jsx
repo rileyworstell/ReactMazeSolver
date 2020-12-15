@@ -5,7 +5,7 @@ import { bfs } from '../../algorithms/BFS.js'
 export const Button = (props) => {
     return(
     <button onClick={() => {
-        if (props.clickDo === 1) {
+        if (props.clickDo === 'bfs') {
             if (props.path !== null) {
                 props.recreateGrid();
             }else {
