@@ -1,0 +1,12 @@
+.colorButton {
+    background-color: rgb(249, 137, 232); 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 3px 1.5px;
+    cursor: pointer;
+  }

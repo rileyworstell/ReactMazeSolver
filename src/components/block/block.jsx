@@ -43,28 +43,59 @@ export const Block = (props) => {
      var c = props.id % L;
     
     if (props.gridArr[r][c] === "0") {
-    return(
-        <div id={props.id} onClick={() => clickHandler(props) }  className={props.className}></div>
-    );
+        if (props.colorScheme === 2) {
+            return(
+                <div id={props.id} onClick={() => clickHandler(props) }  className={props.className}></div>
+            );
+        } else {
+            return(
+                <div id={props.id} onClick={() => clickHandler(props) }  className={props.className}></div>
+            );
+        }
+
     }
     else if(props.gridArr[r][c] === "S" ||  props.gridArr[r][c] === "E"){
-        return(
-            <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorBlue`}></div>
-        );
+        if (props.colorScheme === 2) {
+            return(
+                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorOrange`}></div>
+            );
+        } else {
+            return(
+                <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorBlue`}></div>
+            );
+        }
     }
     else if(props.gridArr[r][c] === "V"){
+        if (props.colorScheme === 2) {
+            return(
+                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorGray`}></div>
+            );
+        } else {
         return(
             <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorYellow`}></div>
         );
+        }
     }
     else if(props.gridArr[r][c] === "Solved"){
+        if (props.colorScheme === 2) {
+            return(
+                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorPurple`}></div>
+            );
+        } else {
         return(
             <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorGreen`}></div>
         );
+        }
     }
     else {
+        if (props.colorScheme === 2) {
+            return(
+                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorBlack`}></div>
+            );
+        } else {
         return(
             <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorRed`}></div>
         );
+        }
     }
 }

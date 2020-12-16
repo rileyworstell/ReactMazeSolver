@@ -5,6 +5,7 @@ import {Button} from './components/button/button.jsx'
 import {Selected} from './components/selected/selected.jsx'
 import {Path} from './components/path/path.jsx'
 import {Arr} from './algorithms/initializeArr'
+import {Color} from './components/color/color.jsx'
 
 
 
@@ -21,6 +22,7 @@ class App extends Component {
       startPointSelecter: 0 ,
       s: null,
       path: null,
+      colorScheme: 2
     };
     this.changeBlock = this.changeBlock.bind(this);
     this.recreateGrid = this.recreateGrid.bind(this);
@@ -28,7 +30,7 @@ class App extends Component {
     this.recreateGrid = this.recreateGrid.bind(this);
     this.updatePathMaze = this.updatePathMaze.bind(this);
     this.awaitUpdatePath = this.awaitUpdatePath.bind(this);
-
+    this.changeColor = this.changeColor.bind(this);
   }
 
 
@@ -39,13 +41,17 @@ changeBlock(x, path=null) {
   this.setState({gridArr: x});
 }
 
-updatePathMaze = (x, i) => {
+updatePathMaze = (x, i, leng) => {
+  var time = 15;
+  if (i > leng) {
+    time =100;
+  }
   let promise = new Promise((resolve, reject) => {
     this.setState({gridArr: x}, () => {
       setTimeout(() => { 
       i++;
       resolve(i);
-    }, 15);
+    }, time);
     });
   });
     return promise;
@@ -62,7 +68,7 @@ async awaitUpdatePath(x, path, s, e, leng) {
     } else {
       x[path[i][0][0]][path[i][0][1]] = "Solved";
     }
-    const fetch = await this.updatePathMaze(x, i);
+    const fetch = await this.updatePathMaze(x, i, leng);
     i = fetch;
   }
 
@@ -82,6 +88,15 @@ pointSelecter(point) {
     }else {
      this.setState({startPointSelecter: this.state.startPointSelecter + 1});
     }
+}
+
+changeColor() {
+ if (this.state.colorScheme !== 2) {
+   this.setState({colorScheme: 2});
+ }
+ else {
+  this.setState({colorScheme: 1});
+ }
 }
 
 recreateGrid() {
@@ -136,8 +151,11 @@ recreateGrid() {
           className={"button"} 
           s={this.state.s}
           text={"Start BFS"}/>
+
+          <Color changeColor={this.changeColor} text={"Switch Colors"} />
      <div></div> 
      <Grid gridLength={this.state.gridLength} 
+          colorScheme={this.state.colorScheme}
           changeBlock={this.changeBlock} 
           gridArr={this.state.gridArr} 
           s={this.state.s}

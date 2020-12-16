@@ -8,6 +8,32 @@
   
   .blockColorRed {
     background: lightcoral;
+    animation-name: example;
+    animation-duration: .5s;
+  }
+
+  .blockColorOrange {
+    background: orange;
+    animation-name: example;
+    animation-duration: .5s;
+  }
+
+  .blockColorGray {
+    background: grey;
+    animation-name: example;
+    animation-duration: .5s;
+  }
+
+  .blockColorPurple {
+    background: purple;
+    animation-name: example;
+    animation-duration: .5s;
+  }
+
+  .blockColorBlack {
+    background: darkgray;
+    animation-name: example;
+    animation-duration: .5s;
   }
 
   .blockColorBlue {
@@ -16,10 +42,18 @@
 
   .blockColorGreen {
     background: lightgreen;
+    animation-name: example;
+    animation-duration: .5s;
   }
 
   .blockColorYellow {
     background: lightyellow;
+    animation-name: example;
+    animation-duration: 1.5s;
+  }
+  @keyframes example {
+    from {opacity: 0;}
+    to {opacity: 1;}
   }
 
 
