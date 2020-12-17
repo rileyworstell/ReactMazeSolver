@@ -7,22 +7,23 @@ import {Path} from './components/path/path.jsx'
 import {Arr} from './algorithms/initializeArr'
 import {Color} from './components/color/color.jsx'
 
-
+let initialValues = Arr(10);
+var arr = initialValues[0];
+var num = initialValues[1];
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    let initialValues = Arr();
-    var arr = initialValues[0];
-    var num = initialValues[1];
+
     this.state = {
       gridArr: arr,
       gridLength: num,
       startPointSelecter: 0 ,
       s: null,
       path: null,
-      colorScheme: 2
+      colorScheme: 2,
+      gridClassName: 'mainGrid'
     };
     this.changeBlock = this.changeBlock.bind(this);
     this.recreateGrid = this.recreateGrid.bind(this);
@@ -31,6 +32,7 @@ class App extends Component {
     this.updatePathMaze = this.updatePathMaze.bind(this);
     this.awaitUpdatePath = this.awaitUpdatePath.bind(this);
     this.changeColor = this.changeColor.bind(this);
+    this.changeSize = this.changeSize.bind(this);
   }
 
 
@@ -42,7 +44,7 @@ changeBlock(x, path=null) {
 }
 
 updatePathMaze = (x, i, leng) => {
-  var time = 15;
+  var time = 30;
   if (i > leng) {
     time =100;
   }
@@ -73,6 +75,7 @@ async awaitUpdatePath(x, path, s, e, leng) {
   }
 
   // resets starting and ending points
+  x[path[leng][0][0]][path[leng][0][1]] = "Solved"
   x[s[0]][s[1]] = "S";
   x[e[0]][e[1]] = "E";
   // this splits that path to solve from the whole path
@@ -99,9 +102,27 @@ changeColor() {
  }
 }
 
-recreateGrid() {
+changeSize() {
+  if (this.state.gridLength === 10) {  
+    this.setState({gridLength: 12, gridClassName: 'mainGrid12'});
+    this.recreateGrid(12);
+  }
+  else {
+   this.setState({gridLength: 10, gridClassName: 'mainGrid'});
+   this.recreateGrid(10);
+  }
+  
+ }
+
+recreateGrid(x) {
   var arr = [];
-  var num = 10;
+  if (x === null || x === undefined) {
+    var num = this.state.gridLength;
+  }
+  else {
+    var num = x;
+  }
+
   for (var i = 0; i < num; i++) {
     arr[i] = new Array(num);
   }
@@ -143,6 +164,7 @@ recreateGrid() {
 
      <Button gridLength={this.state.gridLength} 
           clickDo={'bfs'}
+          gridLength={this.state.gridLength}
           awaitUpdatePath={this.awaitUpdatePath}
           path={this.state.path}
           changeBlock={this.changeBlock} 
@@ -152,7 +174,8 @@ recreateGrid() {
           s={this.state.s}
           text={"Start BFS"}/>
 
-          <Color changeColor={this.changeColor} text={"Switch Colors"} />
+          <Color elector={1} changeColor={this.changeColor} text={"Switch Colors"} />
+          <Color  elector={2} changeSize={this.changeSize} text={"Switch Size"} />
      <div></div> 
      <Grid gridLength={this.state.gridLength} 
           colorScheme={this.state.colorScheme}
@@ -161,7 +184,7 @@ recreateGrid() {
           s={this.state.s}
           startPointSelecter={this.state.startPointSelecter}
           pointSelecter={this.pointSelecter}
-          className="mainGrid"/> 
+          className={this.state.gridClassName}/> 
           <br />
           <br />
           <Path path={this.state.path}/>

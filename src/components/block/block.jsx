@@ -41,7 +41,7 @@ export const Block = (props) => {
     r = Math.floor(props.id / L);
     }
      var c = props.id % L;
-    
+
     if (props.gridArr[r][c] === "0") {
         if (props.colorScheme === 2) {
             return(
@@ -68,7 +68,7 @@ export const Block = (props) => {
     else if(props.gridArr[r][c] === "V"){
         if (props.colorScheme === 2) {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorGray`}></div>
+                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorOcean`}></div>
             );
         } else {
         return(
@@ -79,7 +79,7 @@ export const Block = (props) => {
     else if(props.gridArr[r][c] === "Solved"){
         if (props.colorScheme === 2) {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorPurple`}></div>
+                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorPink`}></div>
             );
         } else {
         return(
@@ -90,7 +90,7 @@ export const Block = (props) => {
     else {
         if (props.colorScheme === 2) {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorBlack`}></div>
+                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorSalmon`}></div>
             );
         } else {
         return(

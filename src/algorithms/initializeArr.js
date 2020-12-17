@@ -1,8 +1,8 @@
 
-export const Arr = () => {
+export const Arr = (num) => {
     // Creates Array to be able to map over the blocks
     var arr = [];
-    var num = 10;
+    var num = num;
     for (var i = 0; i < num; i++) {
         arr[i] = new Array(num);
     }

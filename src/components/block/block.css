@@ -2,8 +2,8 @@
 .block {
     color: green;
     border: 1px black solid;
-    width: 4em;
-    height: 4em;
+    width: 3em;
+    height: 3em;
   }
   
   .blockColorRed {
@@ -18,20 +18,20 @@
     animation-duration: .5s;
   }
 
-  .blockColorGray {
-    background: grey;
+  .blockColorOcean {
+    background: rgb(163, 240, 235);
     animation-name: example;
     animation-duration: .5s;
   }
 
-  .blockColorPurple {
-    background: purple;
+  .blockColorPink {
+    background: rgb(222, 138, 222);
     animation-name: example;
     animation-duration: .5s;
   }
 
-  .blockColorBlack {
-    background: darkgray;
+  .blockColorSalmon {
+    background: rgb(143, 189, 139);
     animation-name: example;
     animation-duration: .5s;
   }

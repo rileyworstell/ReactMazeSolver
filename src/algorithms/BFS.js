@@ -1,7 +1,7 @@
 
 export const bfs = (props, arr, sP) => {
     var s;
-    if (sP !== null) {
+    if (sP !== null && sP !== undefined) {
         s = sP
         arr[s[0]][s[1]] = "S";
     }
@@ -11,14 +11,14 @@ export const bfs = (props, arr, sP) => {
     }
     var prev;
     var visitedList = [];
-    var R = 10;
-    var C = 10;
+    var R = props.gridLength;
+    var C = props.gridLength;
     var dr = [-1, 1, 0, 0];
     var dc = [0, 0, 1, -1];
     // put an ending point
-    arr[9][9] = "E"
+    arr[props.gridLength-1][props.gridLength-1] = "E"
 
-    var e = [9, 9];
+    var e = [props.gridLength-1, props.gridLength-1];
 
     props.changeBlock(arr);
 
@@ -76,11 +76,11 @@ export const solve = (s, prev, R, C, dr, dc, arr, props, visitedList) => {
   prev = [];
   q.push([r, c]);
   var visited = [];
-  for (var i = 0; i < 10; i++) {
-    visited[i] = new Array(10);
+  for (var i = 0; i < props.gridLength; i++) {
+    visited[i] = new Array(props.gridLength);
   }
-  for (i = 0; i < 10; i++) {
-    for (var j = 0; j < 10; j++) {
+  for (i = 0; i < props.gridLength; i++) {
+    for (var j = 0; j < props.gridLength; j++) {
         visited[i][j] = 0;
     }
   }
