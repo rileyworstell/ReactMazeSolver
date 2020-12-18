@@ -1,5 +1,5 @@
 
-export const bfs = (props, arr, sP) => {
+export const dfs = (props, arr, sP) => {
     var s;
     if (sP !== null && sP !== undefined) {
         s = sP
@@ -57,6 +57,7 @@ export const reconstructPath = (s, e, prev, arr, props, visitedList) => {
 
     var x = arr;
     var leng = visitedList.length;
+
     // push visited spots to beginning of path before calling awaitUpdatePath
     for (var z = 0; z < visitedList.length; z++) {
       path.unshift([visitedList[z]]);
@@ -72,9 +73,9 @@ export const solve = (s, prev, R, C, dr, dc, arr, props, visitedList) => {
 	var parent;
   var r = s[0];
   var c = s[1];
-  var q = [];
+  var stack = [];
   prev = [];
-  q.push([r, c]);
+  stack.push([r, c]);
   var visited = [];
   for (var i = 0; i < props.gridLength; i++) {
     visited[i] = new Array(props.gridLength);
@@ -89,11 +90,10 @@ export const solve = (s, prev, R, C, dr, dc, arr, props, visitedList) => {
 //   props.updateVisited(r, c);
 
   
-  while (q.length !== 0) {
-  	r = q[0][0];
-    c = q[0][1];
-    parent = q.shift();
-    
+  while (stack.length !== 0) {
+  	r = stack[stack.length-1][0];
+    c = stack[stack.length-1][1];
+    parent = stack.pop();
     for (var x1 = 0; x1 < 4; x1++) {
     	rr = r + dr[x1];
         cc = c + dc[x1];
@@ -115,7 +115,7 @@ export const solve = (s, prev, R, C, dr, dc, arr, props, visitedList) => {
          }
 
          if (visited[rr][cc] !== 1) {
-         	q.push([rr, cc]);
+         	stack.push([rr, cc]);
           visited[rr][cc] = 1;
           visitedList.unshift([r, c]);
           prev.push([[rr, cc], [parent]]);

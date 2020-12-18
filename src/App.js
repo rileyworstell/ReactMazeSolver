@@ -22,7 +22,7 @@ class App extends Component {
       startPointSelecter: 0 ,
       s: null,
       path: null,
-      colorScheme: 2,
+      colorScheme: 1,
       gridClassName: 'mainGrid'
     };
     this.changeBlock = this.changeBlock.bind(this);
@@ -61,6 +61,7 @@ updatePathMaze = (x, i, leng) => {
 
 
 async awaitUpdatePath(x, path, s, e, leng) {
+  // console.log(path);
   // i is the promise and when the promise is returned it is incremented (this is for UI purposes)
   var i = 0;
   while ( i < path.length) {
@@ -114,20 +115,40 @@ changeSize() {
   
  }
 
-recreateGrid(x) {
+recreateGrid(x, notWalls) {
+  var i;
+  var j;
   var arr = [];
+  var num;
   if (x === null || x === undefined) {
-    var num = this.state.gridLength;
+    num = this.state.gridLength;
   }
   else {
-    var num = x;
+    num = x;
+  }
+  if (notWalls === true) {
+    arr = this.state.gridArr;
+    for (i = 0; i < num; i++) {
+      for (j = 0; j < num; j++) {
+        if (arr[i][j] !== "1") {
+          arr[i][j] = "0";
+        }
+          
+      }
+    }
+    arr[num-1][num-1] = "E";
+    this.setState({gridArr: arr,
+                  startPointSelecter: 0,
+                  path: null
+    }); 
   }
 
-  for (var i = 0; i < num; i++) {
+  else {
+  for (i = 0; i < num; i++) {
     arr[i] = new Array(num);
   }
   for (i = 0; i < num; i++) {
-    for (var j = 0; j < num; j++) {
+    for (j = 0; j < num; j++) {
         arr[i][j] = "0";
     }
   }
@@ -137,6 +158,7 @@ recreateGrid(x) {
                 s: null,
                 path: null,
   }); 
+}
 }
   render() {
   return (
@@ -173,6 +195,18 @@ recreateGrid(x) {
           className={"button"} 
           s={this.state.s}
           text={"Start BFS"}/>
+
+<Button gridLength={this.state.gridLength} 
+          clickDo={'dfs'}
+          gridLength={this.state.gridLength}
+          awaitUpdatePath={this.awaitUpdatePath}
+          path={this.state.path}
+          changeBlock={this.changeBlock} 
+          recreateGrid={this.recreateGrid}
+          gridArr={this.state.gridArr} 
+          className={"button"} 
+          s={this.state.s}
+          text={"Start DFS"}/>
 
           <Color elector={1} changeColor={this.changeColor} text={"Switch Colors"} />
           <Color  elector={2} changeSize={this.changeSize} text={"Switch Size"} />
