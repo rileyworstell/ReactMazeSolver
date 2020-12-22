@@ -23,7 +23,8 @@ class App extends Component {
       s: null,
       path: null,
       colorScheme: 1,
-      gridClassName: 'mainGrid'
+      gridClassName: 'mainGrid',
+      isClickedDown: 0
     };
     this.changeBlock = this.changeBlock.bind(this);
     this.recreateGrid = this.recreateGrid.bind(this);
@@ -33,6 +34,7 @@ class App extends Component {
     this.awaitUpdatePath = this.awaitUpdatePath.bind(this);
     this.changeColor = this.changeColor.bind(this);
     this.changeSize = this.changeSize.bind(this);
+    this.isDown = this.isDown.bind(this);
   }
 
 
@@ -103,6 +105,15 @@ changeColor() {
  }
 }
 
+isDown() {
+  if (this.state.isClickedDown !== 1) {
+    this.setState({isClickedDown: 1});
+  }
+  else {
+   this.setState({isClickedDown: 0});
+  }
+ }
+
 changeSize() {
   if (this.state.gridLength === 10) {  
     this.setState({gridLength: 12, gridClassName: 'mainGrid12'});
@@ -114,6 +125,7 @@ changeSize() {
   }
   
  }
+
 
 recreateGrid(x, notWalls) {
   var i;
@@ -162,7 +174,7 @@ recreateGrid(x, notWalls) {
 }
   render() {
   return (
-    <div className="App">
+    <div onDragEnd={() => this.isDown()} onMouseDown={() => this.isDown()} onMouseUp={() => this.isDown()} className="App">
      <div>This is a maze solver!
        <br/> Select Blocks to make them walls (red) and optionally select starting point and make a blue block. 
        <br/> Yellow will show the algorithm working and Green is the path. 
@@ -211,7 +223,10 @@ recreateGrid(x, notWalls) {
           <Color elector={1} changeColor={this.changeColor} text={"Switch Colors"} />
           <Color  elector={2} changeSize={this.changeSize} text={"Switch Size"} />
      <div></div> 
+
      <Grid gridLength={this.state.gridLength} 
+          isDown={this.isDown}
+          isClickedDown={this.state.isClickedDown}
           colorScheme={this.state.colorScheme}
           changeBlock={this.changeBlock} 
           gridArr={this.state.gridArr} 
