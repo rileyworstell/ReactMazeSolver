@@ -1,6 +1,12 @@
 import React from 'react';
 import './block.css';
 
+let enterHandler = (props) => {
+    if (props.isClickedDown === 1) {
+        clickHandler(props);
+    }
+}
+
 let clickHandler = (props) => {
     var r;
     var L = props.gridLength;
@@ -45,11 +51,11 @@ export const Block = (props) => {
     if (props.gridArr[r][c] === "0") {
         if (props.colorScheme === 2) {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={props.className}></div>
+                <div id={props.id} onMouseEnter={() => enterHandler(props)} onClick={() => clickHandler(props) }  className={props.className}></div>
             );
         } else {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={props.className}></div>
+                <div id={props.id} onMouseEnter={() => enterHandler(props)} onClick={() => clickHandler(props) }  className={props.className}></div>
             );
         }
 
@@ -57,44 +63,44 @@ export const Block = (props) => {
     else if(props.gridArr[r][c] === "S" ||  props.gridArr[r][c] === "E"){
         if (props.colorScheme === 2) {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorOrange`}></div>
+                <div id={props.id} onMouseEnter={() => enterHandler(props)} onClick={() => clickHandler(props) }  className={`${props.className} blockColorOrange`}></div>
             );
         } else {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorBlue`}></div>
+                <div id={props.id}  onClick={() => clickHandler(props) } className={`${props.className} blockColorBlue`}></div>
             );
         }
     }
     else if(props.gridArr[r][c] === "V"){
         if (props.colorScheme === 2) {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorOcean`}></div>
+                <div id={props.id}  onClick={() => clickHandler(props) }  className={`${props.className} blockColorOcean`}></div>
             );
         } else {
         return(
-            <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorYellow`}></div>
+            <div id={props.id}  onClick={() => clickHandler(props) } className={`${props.className} blockColorYellow`}></div>
         );
         }
     }
     else if(props.gridArr[r][c] === "Solved"){
         if (props.colorScheme === 2) {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorPink`}></div>
+                <div id={props.id}  onClick={() => clickHandler(props) }  className={`${props.className} blockColorPink`}></div>
             );
         } else {
         return(
-            <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorGreen`}></div>
+            <div id={props.id}  onClick={() => clickHandler(props) } className={`${props.className} blockColorGreen`}></div>
         );
         }
     }
     else {
         if (props.colorScheme === 2) {
             return(
-                <div id={props.id} onClick={() => clickHandler(props) }  className={`${props.className} blockColorSalmon`}></div>
+                <div id={props.id} onMouseEnter={() => enterHandler(props)} onClick={() => clickHandler(props) }  className={`${props.className} blockColorSalmon`}></div>
             );
         } else {
         return(
-            <div id={props.id} onClick={() => clickHandler(props) } className={`${props.className} blockColorRed`}></div>
+            <div id={props.id} onMouseEnter={() => enterHandler(props)} onClick={() => clickHandler(props) } className={`${props.className} blockColorRed`}></div>
         );
         }
     }

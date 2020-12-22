@@ -12,7 +12,7 @@ export const Grid = (props) => {
     <div className={props.className}>
       {/* The below creates the main grid with Blocks */}
       {x.map((x,index) => {
-        return <Block colorScheme={props.colorScheme} s={props.s} pointSelecter={props.pointSelecter} startPointSelecter={props.startPointSelecter} gridLength={props.gridLength} changeBlock={props.changeBlock} gridArr={props.gridArr} className="block" key={index} id={index} />;
+        return <Block isDown={props.isDown} isClickedDown={props.isClickedDown} colorScheme={props.colorScheme} s={props.s} pointSelecter={props.pointSelecter} startPointSelecter={props.startPointSelecter} gridLength={props.gridLength} changeBlock={props.changeBlock} gridArr={props.gridArr} className="block" key={index} id={index} />;
       })}
     </div>
     );
