@@ -1,14 +1,14 @@
 .mainGrid {
     display: grid;
     justify-content: center;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+    grid-template-columns: repeat(15, auto);
     color: red;
   }
 
   @media (max-width : 700px) {
     .mainGrid 
     {
-      grid-template-columns: 9% 9% 9% 9% 9% 9% 9% 9% 9% 9%;
+      grid-template-columns: repeat(15, 6%);
     }
     
 }
@@ -17,14 +17,16 @@
 .mainGrid12 {
   display: grid;
   justify-content: center;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  grid-template-columns: repeat(20, auto);
+  grid-template-rows: repeat(20, auto);
   color: red;
 }
 
 @media (max-width : 700px) {
   .mainGrid12 
   {
-    grid-template-columns: 7% 7% 7% 7% 7% 7% 7% 7% 7% 7% 7% 7%;
+    grid-template-columns: repeat(20, 4%);
+
   }
   
 }
