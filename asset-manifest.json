@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/ReactMazeSolver/static/css/main.b668855e.chunk.css",
-    "main.js": "/ReactMazeSolver/static/js/main.433c4527.chunk.js",
-    "main.js.map": "/ReactMazeSolver/static/js/main.433c4527.chunk.js.map",
+    "main.css": "/ReactMazeSolver/static/css/main.fb4b8227.chunk.css",
+    "main.js": "/ReactMazeSolver/static/js/main.2839a5c3.chunk.js",
+    "main.js.map": "/ReactMazeSolver/static/js/main.2839a5c3.chunk.js.map",
     "runtime-main.js": "/ReactMazeSolver/static/js/runtime-main.a5f20121.js",
     "runtime-main.js.map": "/ReactMazeSolver/static/js/runtime-main.a5f20121.js.map",
     "static/js/2.c5ced3c9.chunk.js": "/ReactMazeSolver/static/js/2.c5ced3c9.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.039480c1.chunk.js": "/ReactMazeSolver/static/js/3.039480c1.chunk.js",
     "static/js/3.039480c1.chunk.js.map": "/ReactMazeSolver/static/js/3.039480c1.chunk.js.map",
     "index.html": "/ReactMazeSolver/index.html",
-    "static/css/main.b668855e.chunk.css.map": "/ReactMazeSolver/static/css/main.b668855e.chunk.css.map",
+    "static/css/main.fb4b8227.chunk.css.map": "/ReactMazeSolver/static/css/main.fb4b8227.chunk.css.map",
     "static/js/2.c5ced3c9.chunk.js.LICENSE.txt": "/ReactMazeSolver/static/js/2.c5ced3c9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a5f20121.js",
     "static/js/2.c5ced3c9.chunk.js",
-    "static/css/main.b668855e.chunk.css",
-    "static/js/main.433c4527.chunk.js"
+    "static/css/main.fb4b8227.chunk.css",
+    "static/js/main.2839a5c3.chunk.js"
   ]
 }
