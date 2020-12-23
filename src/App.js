@@ -7,7 +7,7 @@ import {Path} from './components/path/path.jsx'
 import {Arr} from './algorithms/initializeArr'
 import {Color} from './components/color/color.jsx'
 
-let initialValues = Arr(10);
+let initialValues = Arr(20);
 var arr = initialValues[0];
 var num = initialValues[1];
 
@@ -23,7 +23,7 @@ class App extends Component {
       s: null,
       path: null,
       colorScheme: 1,
-      gridClassName: 'mainGrid',
+      gridClassName: 'mainGrid12',
       isClickedDown: 0
     };
     this.changeBlock = this.changeBlock.bind(this);
@@ -46,9 +46,9 @@ changeBlock(x, path=null) {
 }
 
 updatePathMaze = (x, i, leng) => {
-  var time = 30;
+  var time = 15;
   if (i > leng) {
-    time =100;
+    time =50;
   }
   let promise = new Promise((resolve, reject) => {
     this.setState({gridArr: x}, () => {
@@ -115,13 +115,13 @@ isDown() {
  }
 
 changeSize() {
-  if (this.state.gridLength === 10) {  
-    this.setState({gridLength: 12, gridClassName: 'mainGrid12'});
-    this.recreateGrid(12);
+  if (this.state.gridLength === 15) {  
+    this.setState({gridLength: 20, gridClassName: 'mainGrid12'});
+    this.recreateGrid(20);
   }
   else {
-   this.setState({gridLength: 10, gridClassName: 'mainGrid'});
-   this.recreateGrid(10);
+   this.setState({gridLength: 15, gridClassName: 'mainGrid'});
+   this.recreateGrid(15);
   }
   
  }
@@ -174,7 +174,7 @@ recreateGrid(x, notWalls) {
 }
   render() {
   return (
-    <div onDragEnd={() => this.isDown()} onMouseDown={() => this.isDown()} onMouseUp={() => this.isDown()} className="App">
+    <div draggable={false} onDragOver={() => this.isDown()} onMouseDown={() => this.isDown()} onMouseUp={() => this.isDown()} className="App">
      <div>This is a maze solver!
        <br/> Select Blocks to make them walls (red) and optionally select starting point and make a blue block. 
        <br/> Yellow will show the algorithm working and Green is the path. 
