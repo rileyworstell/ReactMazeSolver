@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ReactMazeSolver/static/css/main.fb4b8227.chunk.css",
-    "main.js": "/ReactMazeSolver/static/js/main.8e91c1fd.chunk.js",
-    "main.js.map": "/ReactMazeSolver/static/js/main.8e91c1fd.chunk.js.map",
+    "main.js": "/ReactMazeSolver/static/js/main.ca7a5559.chunk.js",
+    "main.js.map": "/ReactMazeSolver/static/js/main.ca7a5559.chunk.js.map",
     "runtime-main.js": "/ReactMazeSolver/static/js/runtime-main.a5f20121.js",
     "runtime-main.js.map": "/ReactMazeSolver/static/js/runtime-main.a5f20121.js.map",
     "static/js/2.c5ced3c9.chunk.js": "/ReactMazeSolver/static/js/2.c5ced3c9.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.a5f20121.js",
     "static/js/2.c5ced3c9.chunk.js",
     "static/css/main.fb4b8227.chunk.css",
-    "static/js/main.8e91c1fd.chunk.js"
+    "static/js/main.ca7a5559.chunk.js"
   ]
 }
