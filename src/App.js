@@ -6,6 +6,7 @@ import {Selected} from './components/selected/selected.jsx'
 import {Path} from './components/path/path.jsx'
 import {Arr} from './algorithms/initializeArr'
 import {Color} from './components/color/color.jsx'
+import MetaTags from 'react-meta-tags';
 
 let initialValues = Arr(20);
 var arr = initialValues[0];
@@ -175,6 +176,13 @@ recreateGrid(x, notWalls) {
   render() {
   return (
     <div draggable={false} onDragOver={() => this.isDown()} onMouseDown={() => this.isDown()} onMouseUp={() => this.isDown()} className="App">
+      <MetaTags>
+      <meta name="Maze Solver" property="og:title" content="Maze Solver" />
+    <meta property="og:type" content="[Content type here]" />
+    <meta name="image" property="og:image" content="./public/mazePic.png" />
+    <meta name="description" property="og:description" content="Maze Solver" />
+    <meta name="author" content="Riley Worstell"></meta>
+    </MetaTags>
      <div>This is a maze solver!
        <br/> Select Blocks to make them walls (red) and optionally select starting point and make a blue block. 
        <br/> Yellow will show the algorithm working and Green is the path. 
